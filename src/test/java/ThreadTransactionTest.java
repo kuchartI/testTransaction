@@ -9,19 +9,19 @@ public class ThreadTransactionTest {
 
     @Test
     public void serializableTest() throws ClassNotFoundException, InterruptedException, ExecutionException {
-        String serializable = connectionBD.runThreads(100, Connection.TRANSACTION_SERIALIZABLE);
+        String serializable = connectionBD.runThreads(200, Connection.TRANSACTION_SERIALIZABLE);
         DataWriter.write(serializable, "serializable");
     }
 
     @Test
     public void repeatableReadTest() throws ClassNotFoundException, InterruptedException, IOException, ExecutionException {
-        String repeatableRead = connectionBD.runThreads(100, Connection.TRANSACTION_REPEATABLE_READ);
+        String repeatableRead = connectionBD.runThreads(200, Connection.TRANSACTION_REPEATABLE_READ);
         DataWriter.write(repeatableRead, "repeatableRead");
     }
 
     @Test
     public void readCommittedTest() throws ClassNotFoundException, InterruptedException, ExecutionException {
-        String readCommitted = connectionBD.runThreads(100, Connection.TRANSACTION_READ_COMMITTED);
+        String readCommitted = connectionBD.runThreads(200, Connection.TRANSACTION_READ_COMMITTED);
         DataWriter.write(readCommitted, "readCommitted");
     }
 

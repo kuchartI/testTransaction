@@ -6,7 +6,7 @@ import java.sql.Statement;
 public class ThreadTransaction {
 
     public String select(Connection connection, int count) {
-        String SQL1 = "SELECT * FROM pizza";
+        String SQL1 = "SELECT * FROM pizza where weight = 385";
         StringBuilder selectData = new StringBuilder();
         for (int i = 0; i < count; i++) {
             long start = System.nanoTime();
@@ -25,13 +25,16 @@ public class ThreadTransaction {
     public String update(Connection connection, int count) {
         StringBuilder updateData = new StringBuilder();
         for (int i = 0; i < count; i++) {
+            boolean trytrytry = true;
             long start = System.nanoTime();
-            try (Statement statement = connection.createStatement()) {
-                statement.executeUpdate(
-                        "UPDATE pizza set name = 'Ntasdjakdasd123llSJsk' where id = " + (i + 10));
-            } catch (SQLException e) {
-                System.out.println("GG");
-            }
+            while (trytrytry)
+                try (Statement statement = connection.createStatement()) {
+                    statement.executeUpdate(
+                            "UPDATE pizza set name = 'Ntasdjakdasd123llSJsk' where weight = 385");
+                    trytrytry = false;
+                } catch (SQLException e) {
+                    System.out.println("Try again later");
+                }
             long end = System.nanoTime();
             updateData.append(" UPDATE ").append(end - start).append("\n");
         }
